@@ -10,7 +10,7 @@ import requests
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from PIL import Image
-
+from fastapi import File, UploadFile
 # ========= CONFIG =========
 
 MODEL_PATH = os.path.join("model", "rooms_classifier_finetuned.onnx")
@@ -147,3 +147,24 @@ def predict_endpoint(req: PredictRequest):
 
     result = predict_room_type(req.imageUrl)
     return result
+@app.post("/predict-file")
+def predict_file(file: UploadFile = File(...)):
+    try:
+        img_bytes = file.file.read()
+        img = Image.open(io.BytesIO(img_bytes)).convert("RGB")
+
+        input_tensor = preprocess_image(img)
+
+        outputs = session.run([output_name], {input_name: input_tensor})[0]
+        probs = softmax(outputs)[0]
+        pred_idx = int(np.argmax(probs))
+        confidence = float(probs[pred_idx])
+        room_type = CLASS_NAMES[pred_idx]
+
+        return {
+            "roomType": room_type,
+            "confidence": confidence
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
