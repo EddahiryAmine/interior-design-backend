@@ -15,7 +15,6 @@ from fastapi import File, UploadFile
 
 MODEL_PATH = os.path.join("model", "rooms_classifier_finetuned.onnx")
 
-# ⚠️ À ADAPTER selon tes classes réelles :
 CLASS_NAMES = [
     "bathroom",
     "bedroom",
@@ -25,10 +24,9 @@ CLASS_NAMES = [
 ]
 
 
-IMG_SIZE = 224  # taille utilisée à l'entraînement (probablement 224x224)
+IMG_SIZE = 224
 
 
-# ========= FASTAPI APP =========
 
 app = FastAPI(
     title="AI Room Type Service",
@@ -46,9 +44,8 @@ class PredictResponse(BaseModel):
     confidence: float
 
 
-# ========= MODEL LOADING =========
 
-print("🔄 Chargement du modèle ONNX...")
+print(" Chargement du modèle ONNX...")
 if not os.path.exists(MODEL_PATH):
     raise RuntimeError(f"Model file not found at {MODEL_PATH}")
 
