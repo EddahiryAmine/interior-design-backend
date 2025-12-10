@@ -117,14 +117,14 @@ public class AuthService {
         User user = optionalUser.get();
 
         if ("ACTIVE".equalsIgnoreCase(user.getStatus())) {
-            return "ℹ️ Ce compte est déjà activé.";
+            return " Ce compte est déjà activé.";
         }
 
         user.setStatus("ACTIVE");
         user.setVerificationToken(null);
         userRepository.save(user);
 
-        return "✅ Compte vérifié avec succès. Vous pouvez maintenant vous connecter.";
+        return "Compte vérifié avec succès. Vous pouvez maintenant vous connecter.";
     }
 }
 
