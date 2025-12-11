@@ -8,9 +8,9 @@ public class CreateRoomRequest {
     private String userId;
 
     @NotBlank
-    private String imageUrl;  // URL retournée par media-service
+    private String imageUrl;
 
-    private String desiredRoomType; // ex: "gaming_room"
+    private String desiredRoomType;
     private String styleId;
     private String colorPaletteId;
 

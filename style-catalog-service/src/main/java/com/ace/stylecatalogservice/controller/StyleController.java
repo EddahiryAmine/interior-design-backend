@@ -40,7 +40,6 @@ public class StyleController {
 
     @PostMapping
     public ResponseEntity<Style> create(@Valid @RequestBody Style style) {
-        // On normalise le code en majuscules
         if (style.getCode() != null) {
             style.setCode(style.getCode().toUpperCase());
         }

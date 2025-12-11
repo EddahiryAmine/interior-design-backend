@@ -30,13 +30,11 @@ public class RoomServiceImpl implements RoomService {
     @Transactional
     public Room createRoom(CreateRoomRequest request) {
 
-        // 1) Appel au service AI pour détecter le type de pièce
         AiPredictionResponse prediction = aiRoomServiceClient.predictRoomType(request.getImageUrl());
 
         log.info("AI prediction for image {} => type={}, confidence={}",
                 request.getImageUrl(), prediction.getRoomType(), prediction.getConfidence());
 
-        // 2) Construire l'entité Room
         Room room = new Room();
         room.setUserId(request.getUserId());
         room.setOriginalImageUrl(request.getImageUrl());

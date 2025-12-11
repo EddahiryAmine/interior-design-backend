@@ -28,6 +28,6 @@ public class MongoConfig {
 
     @Bean
     public MongoTemplate mongoTemplate() {
-        return new MongoTemplate(mongoClient(), "smartfun_match");
+        return new MongoTemplate(mongoClient(), "interior_Room");
     }
 }
