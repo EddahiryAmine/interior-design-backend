@@ -19,7 +19,6 @@ public class RoomController {
         this.roomService = roomService;
     }
 
-    // Création d'une pièce à partir d'une image déjà uploadée
     @PostMapping
     public ResponseEntity<Room> createRoom(@Valid @RequestBody CreateRoomRequest request) {
         Room room = roomService.createRoom(request);
