@@ -24,6 +24,8 @@ public class Room {
     private String colorPaletteId;
 
     private LocalDateTime createdAt = LocalDateTime.now();
+    private String generatedImageUrl;
+    private String designPrompt;
 
     public Room() {
     }
@@ -99,4 +101,20 @@ public class Room {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+    public String getGeneratedImageUrl() {
+        return generatedImageUrl;
+    }
+
+    public void setGeneratedImageUrl(String generatedImageUrl) {
+        this.generatedImageUrl = generatedImageUrl;
+    }
+
+    public String getDesignPrompt() {
+        return designPrompt;
+    }
+
+    public void setDesignPrompt(String designPrompt) {
+        this.designPrompt = designPrompt;
+    }
+
 }

@@ -58,4 +58,14 @@ public class MediaController {
     }
 
     private record UploadResponse(String filename, String url) {}
+    @PostMapping(value = "/upload-bytes", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> uploadBytes(@RequestParam("file") MultipartFile file) {
+        String filename = storageService.store(file);
+
+        String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+        String url = baseUrl + "/media/files/" + filename;
+
+        return ResponseEntity.ok(new UploadResponse(filename, url));
+    }
+
 }
